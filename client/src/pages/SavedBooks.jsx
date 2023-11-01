@@ -5,7 +5,6 @@ import { removeBookId } from "../utils/localStorage";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { DELETE_BOOK } from "../utils/mutations";
-// import { getMe, deleteBook } from "../utils/API";
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
