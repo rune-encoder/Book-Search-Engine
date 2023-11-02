@@ -6,17 +6,14 @@ import { QUERY_ME } from "../utils/queries";
 import { DELETE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
+  // This is the query that will get the user's saved books
   const { loading, data } = useQuery(QUERY_ME);
-  // , {
-  //   variables: { username: userData.username },
-  // });
-  
+
+  // This is the mutation that will delete the book from the database
   const [deleteBook, { error }] = useMutation(DELETE_BOOK);
 
-  console.log(data)
-
+  // create const to hold the returned user data from the query
   const userData = data?.me || {};
-  console.log(userData);
 
   // if data isn't here yet, say so
   if (loading) {

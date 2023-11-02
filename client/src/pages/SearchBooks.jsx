@@ -11,11 +11,12 @@ const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
 
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState("Star Wars");
+  const [searchInput, setSearchInput] = useState("");
 
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
+  // This is the mutation that will save the book to the database
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   useEffect(() => {

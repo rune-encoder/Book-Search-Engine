@@ -11,7 +11,7 @@ const resolvers = {
         );
         return userData;
       }
-      throw new AuthenticationError("Not logged in");
+      throw new AuthenticationError("You must be logged in!");
     },
   },
 
@@ -22,12 +22,11 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       } catch (error) {
-        throw new Error("Failed to create user");
+        throw new Error("Failed to create user!");
       }
     },
 
     login: async (parent, { email, password }) => {
-
       const user = await User.findOne({ email });
       if (!user) {
         throw new AuthenticationError("Login failed");
