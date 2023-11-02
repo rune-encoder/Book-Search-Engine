@@ -27,41 +27,40 @@ export const LOGIN_USER = gql`
 `;
 
 export const SAVE_BOOK = gql`
-mutation saveBook($input: savedBook!) {
-  saveBook(input: $input) {
-    _id
-    username
-    email
-    bookCount
-    savedBooks {
-      bookId
-      authors
-      description
-      title
-      image
-      link
+  mutation saveBook($input: savedBook!) {
+    saveBook(input: $input) {
+      _id
+      username
+      email
+      bookCount
+      savedBooks {
+        bookId
+        authors
+        description
+        title
+        image
+        link
+      }
     }
   }
-}
 `;
 
-//  ! RECHECK LATER - UNSURE IF THIS IS CORRECT
 export const DELETE_BOOK = gql`
-mutation deleteBook($bookId: ID!) {
-  deleteBook(bookId: $bookId) {
-    _id
-    username
-    email
-    password
-    bookCount
-    savedBooks {
-      bookId
-      authors
-      description
-      title
-      image
-      link
+  mutation deleteBook($bookId: ID!) {
+    deleteBook(bookId: $bookId) {
+      _id
+      username
+      email
+      password
+      bookCount
+      savedBooks {
+        bookId
+        authors
+        description
+        title
+        image
+        link
+      }
     }
   }
-}
 `;

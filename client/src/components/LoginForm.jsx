@@ -32,9 +32,12 @@ const LoginForm = () => {
         variables: { ...userFormData },
         onCompleted: (data) => {
           Auth.login(data.login.token);
-        }
+        },
       });
 
+      if (!data) {
+        throw new Error("Failed to login user!");
+      }
     } catch (err) {
       console.error(err);
       setShowAlert(true);
