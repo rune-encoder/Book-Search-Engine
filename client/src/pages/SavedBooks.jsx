@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
 import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
@@ -7,16 +6,22 @@ import { QUERY_ME } from "../utils/queries";
 import { DELETE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
-  const [userData, setUserData] = useState({});
-  const [deleteBook, { error }] = useMutation(DELETE_BOOK, {
-    refetchQueries: [QUERY_ME, "me"],
-  });
+  const { loading, data } = useQuery(QUERY_ME);
+  // , {
+  //   variables: { username: userData.username },
+  // });
+  
+  const [deleteBook, { error }] = useMutation(DELETE_BOOK);
 
-  const { loading, data } = useQuery(QUERY_ME, {
-    variables: { username: userData.username },
-  });
+  console.log(data)
 
-  setUserData(data?.me || {});
+  const userData = data?.me || {};
+  console.log(userData);
+
+  // if data isn't here yet, say so
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -27,25 +32,19 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const { data } = await deleteBook({
+        variables: { bookId },
+      });
 
-      if (!response.ok) {
+      if (!data) {
         throw new Error("something went wrong!");
       }
 
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
       console.error(err);
     }
   };
-
-  // if data isn't here yet, say so
-  if (!userDataLength) {
-    return <h2>LOADING...</h2>;
-  }
 
   return (
     <>
