@@ -12,7 +12,7 @@
 ![](https://img.shields.io/badge/Heroku-430098.svg?style=for-the-badge&logo=Heroku&logoColor=white)
 </p>
 
-![Book Search Engine](assets\screenshot.png)
+![Book Search Engine](assets/screenshot.png)
 
 ## Description
 
